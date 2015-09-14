@@ -1,14 +1,9 @@
 config ZRAM
 	tristate "Compressed RAM block device support"
-	#ifdef CONFIG_PRODUCT_REALME_RMX1801
-	# Wen.Luo@PSW.BSP.Kernel.Driver,2018/12/10, Add for enable crypto lz4 compress for zram lz4
-	depends on BLOCK && SYSFS && ZSMALLOC
-	select LZO_COMPRESS
-	select LZO_DECOMPRESS
-	#else
-	#depends on BLOCK && SYSFS && ZSMALLOC && CRYPTO
-	#select CRYPTO_LZO
-	#endif
+	depends on BLOCK && SYSFS && CRYPTO
+	select CRYPTO_LZ4
+	select ZPOOL
+
 	default n
 	help
 	  Creates virtual block devices called /dev/zramX (X = 0, 1, ...).
