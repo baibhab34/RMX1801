@@ -38,15 +38,37 @@ config ZRAM_MEMORY_TRACKING
 
 	  See Documentation/blockdev/zram.txt for more information.
 
-#ifdef CONFIG_PRODUCT_REALME_RMX1801
-# Wen.Luo@PSW.BSP.Kernel.Driver,2018/12/10, Add for enable crypto lz4 compress for zram lz4
-config ZRAM_LZ4_COMPRESS
-	bool "Enable LZ4 algorithm support"
-	depends on ZRAM
-	select LZ4_COMPRESS
-	select LZ4_DECOMPRESS
-	default n
+config ZRAM_DEFAULT_COMP_ALGORITHM
+	string "Default ZRAM algorithm"
+	default "lz4"
+
+if ZRAM
+
+choice
+	prompt "Default zRAM compressed memory allocator"
+	default ZRAM_DEFAULT_ZSMALLOC
 	help
-	  This option enables LZ4 compression algorithm support. Compression
-	  algorithm can be changed using `comp_algorithm' device attribute.
-#endif
+	  Select the compressed memory allocator that will be used by default
+	  for all devices.
+
+	config ZRAM_DEFAULT_ZBUD
+		bool "zbud"
+		select ZBUD
+
+	config ZRAM_DEFAULT_Z3FOLD
+		bool "z3fold"
+		select Z3FOLD
+
+	config ZRAM_DEFAULT_ZSMALLOC
+		bool "zsmalloc"
+		select ZSMALLOC
+
+endchoice
+
+config ZRAM_DEFAULT_POOL
+	string
+	default "zbud" if ZRAM_DEFAULT_ZBUD
+	default "z3fold" if ZRAM_DEFAULT_Z3FOLD
+	default "zsmalloc" if ZRAM_DEFAULT_ZSMALLOC
+
+endif
