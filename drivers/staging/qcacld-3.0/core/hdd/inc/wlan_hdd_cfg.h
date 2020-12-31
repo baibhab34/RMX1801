@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012-2019 The Linux Foundation. All rights reserved.
+ * Copyright (c) 2012-2020 The Linux Foundation. All rights reserved.
  *
  * Permission to use, copy, modify, and/or distribute this software for
  * any purpose with or without fee is hereby granted, provided that the
@@ -1840,8 +1840,8 @@ enum hdd_dot11_mode {
  * <ini>
  * gForce1x1Exception - force 1x1 when connecting to certain peer
  * @Min: 0
- * @Max: 1
- * @Default: 0
+ * @Max: 2
+ * @Default: 1
  *
  * This INI when enabled will force 1x1 connection with certain peer.
  *
@@ -1856,7 +1856,7 @@ enum hdd_dot11_mode {
  */
 #define CFG_FORCE_1X1_NAME      "gForce1x1Exception"
 #define CFG_FORCE_1X1_MIN       (0)
-#define CFG_FORCE_1X1_MAX       (1)
+#define CFG_FORCE_1X1_MAX       (2)
 #define CFG_FORCE_1X1_DEFAULT   (1)
 
 /*
@@ -13475,6 +13475,29 @@ enum hw_filter_mode {
 
 /*
  * <ini>
+ * enable_sae_for_sap - Enable/Disable SAE support in driver for SAP
+ * @Min: 0
+ * @Max: 1
+ * @Default: 1
+ *
+ * This ini is used to enable/disable SAE support in driver for SAP mode
+ * Driver will process/drop the SAE authentication frames based on this config.
+ *
+ * Related: None
+ *
+ * Supported Feature: SAE
+ * Usage: External
+ *
+ * </ini>
+ */
+
+#define CFG_ENABLE_SAE_FOR_SAP_NAME    "enable_sae_for_sap"
+#define CFG_ENABLE_SAE_FOR_SAP_DEFAULT (1)
+#define CFG_ENABLE_SAE_FOR_SAP_MIN     (0)
+#define CFG_ENABLE_SAE_FOR_SAP_MAX     (1)
+
+/*
+ * <ini>
  * chan_width_weightage - Channel Width Weightage to calculate best candidate
  * @Min: 0
  * @Max: 100
@@ -15554,6 +15577,28 @@ enum hw_filter_mode {
 #define CFG_DISABLE_4WAY_HS_OFFLOAD_DEFAULT   (0)
 
 /*
+ * <ini>
+ * nb_commands_interval - Used to rate limit nb commands from userspace
+ *
+ * @Min: 0
+ * @Max: 10
+ * Default: 3
+ *
+ * This ini is used to specify the duration in which any supp. nb command from
+ * userspace will not be processed completely in driver. For ex, the default
+ * value of 3 seconds signifies that consecutive commands within that
+ * time will not be processed fully.
+ *
+ * Usage: Internal
+ *
+ * </ini>
+ */
+#define CFG_NB_COMMANDS_RATE_LIMIT          "nb_commands_interval"
+#define CFG_NB_COMMANDS_RATE_LIMIT_MIN      (0)
+#define CFG_NB_COMMANDS_RATE_LIMIT_MAX      (10)
+#define CFG_NB_COMMANDS_RATE_LIMIT_DEFAULT  (3)
+
+/*
  * Type declarations
  */
 
@@ -16388,7 +16433,7 @@ struct hdd_config {
 	uint32_t mawc_nlo_exp_backoff_ratio;
 	uint32_t mawc_nlo_init_scan_interval;
 	uint32_t mawc_nlo_max_scan_interval;
-	bool is_force_1x1;
+	uint8_t is_force_1x1;
 	uint16_t num_11b_tx_chains;
 	uint16_t num_11ag_tx_chains;
 	/* LCA(Last connected AP) disallow configs */
@@ -16483,6 +16528,7 @@ struct hdd_config {
 	uint8_t enable_tx_sch_delay;
 #ifdef WLAN_FEATURE_SAE
 	bool is_sae_enabled;
+	bool enable_sae_for_sap;
 #endif
 	bool enable_rtt_mac_randomization;
 	bool enable_ftopen;
@@ -16519,6 +16565,9 @@ struct hdd_config {
 	uint16_t thermal_throt_dc;
 #endif
 	bool disable_4way_hs_offload;
+	bool ShortGI80MhzEnable;
+	bool ShortGI160MhzEnable;
+	uint8_t nb_commands_interval;
 };
 
 #define VAR_OFFSET(_Struct, _Var) (offsetof(_Struct, _Var))
