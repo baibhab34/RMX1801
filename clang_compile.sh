@@ -14,8 +14,8 @@ export KBUILD_BUILD_USER="baibhab"
 export KBUILD_BUILD_HOST=ubuntu
 # Compile plox
 function compile() {
-    make -j$(nproc) O=out ARCH=arm64 RMX1801_defconfig
-    make -j$(nproc) O=out \
+    make -j30 O=out ARCH=arm64 RMX1801_defconfig
+    make -j30 O=out \
                     ARCH=arm64 \
                       CC=clang \
                       CROSS_COMPILE=aarch64-linux-gnu- \
