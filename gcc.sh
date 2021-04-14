@@ -27,8 +27,8 @@ function compile() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-   zip -r9 Stormbreaker-RMX1801-EAS-${TANGGAL}.zip *
-    curl https://bashupload.com/Stormbreaker-RMX1801-EAS-${TANGGAL}.zip --data-binary @Stormbreaker-RMX1801-EAS-${TANGGAL}.zip
+   zip -r9 Avalanche-RMX1801-EAS-${TANGGAL}.zip *
+    curl https://bashupload.com/Avalanche-RMX1801-EAS-${TANGGAL}.zip --data-binary @Avalanche-RMX1801-EAS-${TANGGAL}.zip
     cd ..
 }
 compile
