@@ -18,6 +18,7 @@ function compile() {
     make -j$(nproc) O=out \
                     ARCH=arm64 \
                       CC=clang \
+                      LD=ld.lld \
                       CROSS_COMPILE=aarch64-linux-gnu- \
                       CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
 
