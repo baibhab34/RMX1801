@@ -24,3 +24,8 @@ obj-$(CONFIG_MSM_VIDC_VMEM) += vmem/
 # TODO: remove me b/62058353
 subdir-ccflags-y += \
 	$(call cc-option,-Wno-frame-larger-than=)
+
+ifeq ($(cc-name),clang)
+KBUILD_CFLAGS  += $(DISABLE_LTO)
+ccflags-y += $(call cc-option, -Os)
+endif
