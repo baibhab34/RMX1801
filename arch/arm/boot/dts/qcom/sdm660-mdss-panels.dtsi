@@ -33,6 +33,7 @@
 // add for panel config files.
 #include "dsi-panel-oppo18316himax_hx83112a_1080_2280_video.dtsi"
 #include "dsi-panel-oppo18316dpt_jdi_nt36672a_1080_2340_video.dtsi"
+#include "dsi-panel-oppo18316tianma_nt36672a_1080_2280_video.dtsi"
 //#endif /*CONFIG_PRODUCT_REALME_RMX1801*/
 
 &soc {
@@ -373,6 +374,14 @@
 //#ifdef CONFIG_PRODUCT_REALME_RMX1801
 //Shengjun.Gou@PSW.MM.Driver.Stability, 2017/09/19,
 //modify for amoled panel power supply
+&dsi_oppo18316tianma_nt36672a_1080_2280_video {
+	qcom,mdss-dsi-panel-timings-phy-v2 = [
+		24 1e 08 09 05 03 04 a0
+		24 1e 08 09 05 03 04 a0
+		24 1e 08 09 05 03 04 a0
+		24 1e 08 09 05 03 04 a0
+		24 1a 08 09 05 03 04 a0];
+};
 
 &dsi_oppo18316himax_hx83112a_1080_2280_video {
 	qcom,mdss-dsi-panel-timings-phy-v2 = [

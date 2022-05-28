@@ -163,7 +163,7 @@
 //Gou shegnjun@PSW.MM.Display.LCD.Stability, 2017/11/30,
 //add for lcd gpio config
 &mdss_dsi0 {
-	qcom,dsi-pref-prim-pan = <&dsi_oppo18316himax_hx83112a_1080_2280_video>;
+	qcom,dsi-pref-prim-pan = <&dsi_oppo18316tianma_nt36672a_1080_2280_video>;
 	pinctrl-names = "mdss_default", "mdss_sleep";
 	pinctrl-0 = <&mdss_dsi_active &mdss_te_active &mdss_exits_active &mdss_poc_1p8_active>;
 	pinctrl-1 = <&mdss_dsi_suspend &mdss_te_suspend &mdss_exits_suspend>;
